@@ -217,3 +217,9 @@ git checkout my-branch
 
 git merge master
 ```
+
+---
+
+# TODO
+
+- Add TOC (https://github.com/jonschlinkert/markdown-toc)
