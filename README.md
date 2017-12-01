@@ -118,14 +118,6 @@ git rebase -i HEAD~2 # git rebase -i looks on the remote for unpushed commits
 git reset --soft HEAD~2 && git commit
 ```
 
-### Squashing last 2 commits on a local branch, v2
-
-```sh
-git reset --soft HEAD~2 &&
-
-git commit
-```
-
 ## Diff
 
 ```sh
