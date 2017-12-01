@@ -40,7 +40,7 @@ git clean -h
 git push origin HEAD:refs/heads/branch-name
 ```
 
-## Amend a commit message on Gerrit
+## Amend a commit message 
 
 ```sh
 git commit --amend # Will amend the previous commit
@@ -50,22 +50,6 @@ OR
 
 ```sh
 git rebase -i
-```
-
-## Amend a commit on Gerrit
-
-```sh
-git checkout master # or the branch that the Gerrit commit was on
-
-git checkout -b amendChange # or any other temp name
-
-git fetch # get from Gerrit - Download > cherry pick > clipboard
-
-git cherry-pick pushedCommit # the branch that the change was committed to
-
-git rebase -i HEAD~2
-
-git push origin HEAD:refs/for/master
 ```
 
 ## Pulling conflicting changes
@@ -84,18 +68,6 @@ git push origin HEAD:refs/for/master
 
 ```sh
 git rebase origin/master
-```
-
-## Merge commit feature branch
-
-```sh
-git fetch
-
-git merge origin/master
-
-git push origin HEAD:refs/heads/ # "/heads/" will skip gerrit for merge commit
-
-git push origin HEAD:refs/for/master # Go through Gerrit
 ```
 
 ## Resetting to a particular state
@@ -222,6 +194,36 @@ git merge -s ours my-branch
 git checkout my-branch
 
 git merge master
+```
+
+## Gerrit-related (but can probably be adapted)
+
+### Amend a commit on Gerrit
+
+```sh
+git checkout master # or the branch that the Gerrit commit was on
+
+git checkout -b amendChange # or any other temp name
+
+git fetch # get from Gerrit - Download > cherry pick > clipboard
+
+git cherry-pick pushedCommit # the branch that the change was committed to
+
+git rebase -i HEAD~2
+
+git push origin HEAD:refs/for/master
+```
+
+### Merge commit feature branch
+
+```sh
+git fetch
+
+git merge origin/master
+
+git push origin HEAD:refs/heads/ # "/heads/" will skip gerrit for merge commit
+
+git push origin HEAD:refs/for/master # Go through Gerrit
 ```
 
 ---
