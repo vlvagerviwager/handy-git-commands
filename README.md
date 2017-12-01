@@ -144,12 +144,6 @@ git branch -d my-local-branch
 git branch -m newName
 ```
 
-## Cherry-picking
-
-```sh
-git checkout git cherry-pick
-```
-
 ## Something messed up - commits stuck/can’t amend/want to squash
 
 ```sh
