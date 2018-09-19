@@ -16,6 +16,12 @@ Text between angle brackets (`< >`) needs to be replaced based on your circumsta
 git branch
 ```
 
+## View remotes (where you are pushing to and pulling from)
+
+```sh
+git remote -vv
+```
+
 ## Get information/help on a git command
 
 ```sh
@@ -181,6 +187,39 @@ git checkout my-branch
 
 git merge master
 ```
+
+## Reset your local master branch (e.g. if it's irreparably messed up)
+
+```sh
+git branch -D master # delete your local master branch
+
+git checkout -b master remotes/upstream/master # pull it back down from the remote repo
+```
+
+## Revert all uncommitted changes including files and folders (e.g. from git merge)
+
+Use with caution.
+
+```sh
+git clean -fd
+```
+
+## Remove lots of accidental commits pulled into PR
+
+https://stackoverflow.com/questions/41955765/git-remove-all-commits-from-pr 
+
+## Remove commits that have been `push`ed
+
+```sh
+git reset --hard HEAD~3
+git push -f origin HEAD 
+```
+
+## Working with forks
+
+###  Checkout branch on someone else’s fork
+
+https://stackoverflow.com/questions/9153598/how-do-i-fetch-a-branch-on-someone-elses-fork-on-github/9153737 
 
 ## Gerrit-related (but can probably be adapted)
 
