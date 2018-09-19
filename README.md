@@ -31,7 +31,8 @@ git -h
 ## Simulate what would happen if a command is run
 
 ```sh
-git --dry-run
+# use the --dry-run flag, e.g. before running "git add .":
+git add . --dry-run
 ```
 
 ## Clean up unindexed files
