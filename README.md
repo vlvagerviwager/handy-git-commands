@@ -18,7 +18,9 @@ Text between angle brackets (`< >`) needs to be replaced based on your circumsta
 git branch
 ```
 
-## View remotes (where you are pushing to and pulling from)
+## View remotes 
+
+Remotes are where you are pushing to and pulling from.
 
 ```sh
 git remote -vv
@@ -65,11 +67,8 @@ git rebase -i
 
 ```sh
 git pull --rebase # commit unpushed changes
-
 git add
-
 git rebase --continue
-
 git push origin HEAD:refs/for/main
 ```
 
@@ -83,7 +82,6 @@ git rebase origin/main
 
 ```sh
 git reflog my-branch # shows pointers
-
 git reset --hard HEAD~2
 ```
 
@@ -105,7 +103,6 @@ Resolve the conflicts. Check out `main` and pull. Check out `mergeBranch`.
 
 ```sh
 git rebase origin/main # the commits should be on mergeBranch now
-
 git merge --squash mergeBranch
 ```
 
@@ -169,25 +166,21 @@ git rerere
 git checkout --
 ```
 
-## Fix merge conflict (GitHub)
+## Fix merge conflict 
 
 ```sh
 git fetch origin
-
 git merge main # Fix conflicts; HEAD = my changes
-
-git add git commit
+git add .
+git commit
 ```
 
 ## Replace my-branch completely with main (or any other branch)
 
 ```sh
 git checkout main
-
 git merge -s ours my-branch
-
 git checkout my-branch
-
 git merge main
 ```
 
@@ -195,7 +188,6 @@ git merge main
 
 ```sh
 git branch -D main # delete your local main branch
-
 git checkout -b main remotes/upstream/main # pull it back down from the remote repo
 ```
 
@@ -211,7 +203,7 @@ git clean -fd
 
 https://stackoverflow.com/questions/41955765/git-remove-all-commits-from-pr 
 
-## Remove commits that have been `push`ed
+## Remove commits that have been pushed
 
 ```sh
 git reset --hard HEAD~3
@@ -243,7 +235,7 @@ git push origin qa
 
 ## Working with forks
 
-###  Checkout branch on someone else’s fork
+###  Checkout a branch on someone else’s fork
 
 https://stackoverflow.com/questions/9153598/how-do-i-fetch-a-branch-on-someone-elses-fork-on-github/9153737 
 
@@ -251,21 +243,16 @@ https://stackoverflow.com/questions/9153598/how-do-i-fetch-a-branch-on-someone-e
 
 ## Working with Gerrit
 
-I used these specific in the context of a Gerrit workflow, but they can be adapted.
+I used these specifically in the context of a Gerrit workflow, but they can be adapted.
 
 ### Amend a commit on Gerrit
 
 ```sh
 git checkout main # or the branch that the Gerrit commit was on
-
 git checkout -b amendChange # or any other temp name
-
 git fetch # get from Gerrit - Download > cherry pick > clipboard
-
 git cherry-pick pushedCommit # the branch that the change was committed to
-
 git rebase -i HEAD~2
-
 git push origin HEAD:refs/for/main
 ```
 
@@ -273,11 +260,8 @@ git push origin HEAD:refs/for/main
 
 ```sh
 git fetch
-
 git merge origin/main
-
 git push origin HEAD:refs/heads/ # "/heads/" will skip gerrit for merge commit
-
 git push origin HEAD:refs/for/main # Go through Gerrit
 ```
 
