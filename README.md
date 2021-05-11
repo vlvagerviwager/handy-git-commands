@@ -1,6 +1,8 @@
-# Handy dandy Git commands
+# Handy-Dandy Git Commands
 
-These are commands which either accomplish basic tasks in the Git version control system, or helped me out of sticky situations when I was learning how to use Git (with Gerrit). I used to look at this list a lot, but ever since I started using GitHub at work (January 2016), I’ve stopped. I probably figured some of these out myself, but the majority come from the Internet, specifically Stack Overflow.
+These are commands which accomplish basic tasks in the Git version control system, and helped me out of sticky situations when I was learning how to use Git (with Gerrit). 
+
+I used to look at this list a lot, but ever since I started using GitHub at work (January 2016), I’ve stopped. I probably figured some of these out myself, but the majority come from the Internet, specifically [Stack Overflow](https://stackoverflow.com/).
 
 Commands/tips are in no particular order.
 
@@ -68,13 +70,13 @@ git add
 
 git rebase --continue
 
-git push origin HEAD:refs/for/master
+git push origin HEAD:refs/for/main
 ```
 
-## Updating a feature branch with master
+## Updating a feature branch with main
 
 ```sh
-git rebase origin/master
+git rebase origin/main
 ```
 
 ## Resetting to a particular state
@@ -99,10 +101,10 @@ git reflog git reset --hard HEAD@{x}
 git checkout -b mergeBranch # save those commits to this branch
 ```
 
-Resolve the conflicts. Check out master and pull. Check out mergeBranch.
+Resolve the conflicts. Check out `main` and pull. Check out `mergeBranch`.
 
 ```sh
-git rebase origin/master # the commits should be on mergeBranch now
+git rebase origin/main # the commits should be on mergeBranch now
 
 git merge --squash mergeBranch
 ```
@@ -172,29 +174,29 @@ git checkout --
 ```sh
 git fetch origin
 
-git merge master # Fix conflicts; HEAD = my changes
+git merge main # Fix conflicts; HEAD = my changes
 
 git add git commit
 ```
 
-## Replace my-branch completely with master (or any other branch)
+## Replace my-branch completely with main (or any other branch)
 
 ```sh
-git checkout master
+git checkout main
 
 git merge -s ours my-branch
 
 git checkout my-branch
 
-git merge master
+git merge main
 ```
 
-## Reset your local master branch (e.g. if it's irreparably messed up)
+## Reset your local main branch (e.g. if it's irreparably messed up)
 
 ```sh
-git branch -D master # delete your local master branch
+git branch -D main # delete your local main branch
 
-git checkout -b master remotes/upstream/master # pull it back down from the remote repo
+git checkout -b main remotes/upstream/main # pull it back down from the remote repo
 ```
 
 ## Revert all uncommitted changes including files and folders (e.g. from git merge)
@@ -216,18 +218,45 @@ git reset --hard HEAD~3
 git push -f origin HEAD 
 ```
 
+## Replace the contents of one branch with another, erasing commit history
+
+In this example, you have a QA branch named `qa` which is missing commits from main or otherwise misaligned, and you want to refresh it with the contents of main. This will not preserve the commit history of `qa` 
+
+```sh
+git checkout main
+git pull origin main
+git branch -D qa
+git checkout -b qa
+git push origin qa -f 
+```
+
+## Push a feature branch
+
+```sh
+git fetch
+git checkout qa
+git merge origin/bug/JIRA-123-fix-this # origin/topic/branch
+git push origin qa
+```
+
+---
+
 ## Working with forks
 
 ###  Checkout branch on someone else’s fork
 
 https://stackoverflow.com/questions/9153598/how-do-i-fetch-a-branch-on-someone-elses-fork-on-github/9153737 
 
-## Gerrit-related (but can probably be adapted)
+---
+
+## Working with Gerrit
+
+I used these specific in the context of a Gerrit workflow, but they can be adapted.
 
 ### Amend a commit on Gerrit
 
 ```sh
-git checkout master # or the branch that the Gerrit commit was on
+git checkout main # or the branch that the Gerrit commit was on
 
 git checkout -b amendChange # or any other temp name
 
@@ -237,7 +266,7 @@ git cherry-pick pushedCommit # the branch that the change was committed to
 
 git rebase -i HEAD~2
 
-git push origin HEAD:refs/for/master
+git push origin HEAD:refs/for/main
 ```
 
 ### Merge commit feature branch
@@ -245,15 +274,15 @@ git push origin HEAD:refs/for/master
 ```sh
 git fetch
 
-git merge origin/master
+git merge origin/main
 
 git push origin HEAD:refs/heads/ # "/heads/" will skip gerrit for merge commit
 
-git push origin HEAD:refs/for/master # Go through Gerrit
+git push origin HEAD:refs/for/main # Go through Gerrit
 ```
 
 ---
 
 # TODO
 
-- Add TOC (https://github.com/jonschlinkert/markdown-toc)
+- Add a table of contents
