@@ -231,6 +231,36 @@ git merge origin/bug/JIRA-123-fix-this # origin/topic/branch
 git push origin qa
 ```
 
+## Can’t rebase on GitHub / GitLab
+
+```sh
+git checkout master
+git pull
+git checkout pr-branch
+git rebase master
+git push origin pr-branch
+```
+
+## Rogue commits in branch
+
+```sh
+git rebase HEAD~n
+<edit the commits and drop them>
+git rebase --continue
+git push -f origin pr-branch
+```
+
+## The source branch is n commits behind the target branch
+
+Don't rebase!
+
+```sh
+git checkout master
+git pull
+git checkout pr-branch
+git merge master
+```
+
 ---
 
 ## Working with forks
